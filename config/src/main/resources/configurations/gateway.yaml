@@ -1,0 +1,43 @@
+server:
+  port: 8001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+#spring:
+#  cloud:
+#    load balancer:
+#      enabled: true
+#    gateway:
+#      routes:
+#        - id: task
+#          uri: lb://TASK
+#          predicates:
+#            - Path=/tasks/**
+
+spring:
+  cloud:
+    load balancer:
+      enabled: true
+    gateway:
+      routes:
+        - id: task
+          uri: lb://TASK
+          predicates:
+            - Path=/tasks/**
+        - id: authentication
+          uri: lb://AUTHENTICATION
+          predicates:
+            - Path=/auth/**,/user/**
+
+
+
+
+app:
+  constants:
+    secretkey: My123SecretKey67Is25Inowegn3592njsgQwertYQ8733TUBYndrrug123456789
+    expirationTime: 10000000
